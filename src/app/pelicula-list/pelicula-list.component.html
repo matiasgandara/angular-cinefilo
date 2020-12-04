@@ -1,0 +1,31 @@
+<h1>Lista de peliculas</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Imagen</th>
+            <th>Nombre</th>
+            <th>Genero</th>
+            <th>Fecha</th>
+            <th>Diponibles</th>
+            <th>Reserva</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor = "let pelicula of peliculas" [ngClass]="{'disponible': pelicula.disponible}">
+            <td><img width="90" [src]="pelicula.img" [alt]="pelicula.name"></td>
+            <td>{{pelicula.name}}</td>
+            <td>{{pelicula.genero}}</td>
+            <td>
+                <span *ngIf="pelicula.estreno != ''">{{pelicula.estreno}}</span>
+                <span class="badge badge-warning" *ngIf="pelicula.estreno == ''">COMINGSOON</span>
+            </td>
+            <td >
+                <span *ngIf="pelicula.disponible > 0">{{pelicula.disponible}} </span>
+                <span class="badge bg-danger text-white" *ngIf="pelicula.disponible == 0 && pelicula.estreno != ''">AGOTADAS</span></td>
+            <td>
+                <app-input-integer (quantityChange)="reservar($event)" [max]="pelicula.disponible" [(quantity)]="pelicula.reserva" *ngIf="pelicula.disponible"></app-input-integer>
+                <button class="btn" (click) = "addToCart(pelicula)">Comprar</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

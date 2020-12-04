@@ -1,0 +1,9 @@
+<h3>Mis reservas</h3>
+<ul class="list-group">
+    <li class="list-group-item d-flex justify-content-between align-items-center"
+     *ngFor="let pelicula of (cartList$ | async)">
+        {{pelicula.name}}: <span class="badge badge-primary badge-pill">
+            {{pelicula.reserva}} 
+        </span>
+    </li>
+</ul>
